@@ -16,7 +16,7 @@ index 33365e5..697c8e0 100644
          _build_ext.initialize_options(self)
          self.define = None
 -        self.symengine_dir = None
-+        self.symengine_dir = os.path.join(getenv('PYODIDE_ROOT'), 'packages/symengine/build/symengine-0.9.0')
++        self.symengine_dir = os.path.join(getenv('PYODIDE_ROOT'), 'packages/libsymengine/build/symengine-0.9.0')
          self.generator = None
          self.build_type = "Release"
  
