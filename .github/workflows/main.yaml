@@ -8,7 +8,6 @@ on:
 
 concurrency:
   group: main-${{ github.head_ref }}
-  cancel-in-progress: true
 
 jobs:
   build-core:
@@ -24,6 +23,9 @@ jobs:
         with:
           repository: pyodide/pyodide
           ref: a95a27e754e61749d7069421387e916bd8edbd7e
+          clean: false
+      - uses: actions/checkout@v2
+        with:
           clean: false
 
       - name: Cache ccache output
@@ -66,13 +68,13 @@ jobs:
           ccache -z
           make -C cpython
           ccache -s
-      - name: build Pyodide core + numpy
+      - name: build Pyodide distribution
         shell: bash -l {0}
         run: |
           # This is necessary to use the ccache from emsdk
           source pyodide_env.sh
           ccache -z
-          PYODIDE_PACKAGES="core,numpy" make
+          PYODIDE_PACKAGES="core,numpy,xarray,tinydb" make
           ccache -s
       - name: check-size
         run: ls -lh dist/
