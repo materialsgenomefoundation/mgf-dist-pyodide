@@ -15,7 +15,6 @@ requirements:
     - pytest
     - scipy
     - symengine
-    - pandas
     - tinydb
     - xarray
 test:

@@ -1,22 +1,17 @@
 package:
   name: symengine
-  version: 0.9.0
+  version: 0.9.2
 source:
-  sha256: dcf174ac708ed2acea46691f6e78b9eb946d8a2ba62f75e87cf3bf4f0d651724
-  url: https://github.com/symengine/symengine/releases/download/v0.9.0/symengine-0.9.0.tar.gz
+  sha256: 9da048692d741bb001d9947a0e2bdf8909600cb4e6f3b9273d518cf93300955d
+  url: https://github.com/symengine/symengine.py/releases/download/v0.9.2/symengine.py-0.9.2.tar.gz
 build:
-  library: true
-  script: |
-      emcmake cmake \
-        -DBUILD_TESTS=OFF \
-        -DBUILD_BENCHMARKS=OFF \
-        -DINTEGER_CLASS=gmp \
-        -DCMAKE_PREFIX_PATH=/src/packages/symengine/dist \
-        -DCMAKE_INSTALL_PREFIX=/src/packages/symengine/dist \
-        -DCMAKE_INSTALL_LIBDIR=lib \
-        -DBUILD_FOR_DISTRIBUTION=yes \
-        -DBUILD_SHARED_LIBS=no \
-        -DGMP_LIBRARY=/src/packages/gmp/build/gmp-6.1.2/.libs/libgmp.a \
-        -DGMP_INCLUDE_DIR=/src/packages/gmp/build/gmp-6.1.2 \
-        .
-      emmake make install
+  ldflags: |
+    -L$(NUMPY_LIB)
+requirements:
+  run:
+    - setuptools
+    - numpy
+    - libsymengine
+test:
+  imports:
+    - symengine
