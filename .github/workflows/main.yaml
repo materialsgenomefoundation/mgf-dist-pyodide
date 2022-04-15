@@ -23,10 +23,10 @@ jobs:
         with:
           repository: pyodide/pyodide
           ref: a95a27e754e61749d7069421387e916bd8edbd7e
-          clean: false
       - uses: actions/checkout@v2
         with:
-          clean: false
+          path: _overlay
+      - run: cp -r _overlay/* .
 
       - name: Cache ccache output
         uses: actions/cache@v2
