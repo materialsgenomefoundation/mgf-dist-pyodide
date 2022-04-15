@@ -74,7 +74,7 @@ jobs:
           # This is necessary to use the ccache from emsdk
           source pyodide_env.sh
           ccache -z
-          PYODIDE_PACKAGES="core,numpy,xarray,tinydb" make
+          PYODIDE_PACKAGES="core,pycalphad" make
           ccache -s
       - name: check-size
         run: ls -lh dist/
@@ -82,6 +82,6 @@ jobs:
       - name: Store artifacts build
         uses: actions/upload-artifact@v2
         with:
-          name: core-build
+          name: mgf-pyodide
           path: ./dist/
           retention-days: 60
